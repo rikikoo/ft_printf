@@ -1,5 +1,5 @@
 # ft_printf
-**school project:** ** WIP ** C's printf re-written from scratch (in compliance to the 42 norm)
+**school project:** ** WIP ** C's printf re-written from scratch (in compliance with the 42 norm)
 
 For the moment my ft_printf can
 - print out types `c`, `s`, `p`, `d` or `i`, `f`, `u`, `o`, `x` and `X`
