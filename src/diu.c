@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 16:25:57 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/19 15:25:16 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/22 19:50:47 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		diu_output(t_specs *specs, char *str, int len)
 	}
 }
 
-char	*diu_format(t_specs *specs, unsigned long long nb, char sign)
+char	*diu_format(t_specs *specs, unsigned long long nb, char s)
 {
 	char	*str;
 	char	*pad;
@@ -42,15 +42,15 @@ char	*diu_format(t_specs *specs, unsigned long long nb, char sign)
 	str = ft_itoa_base(nb, 10, 0);
 	len = ft_strlen(str);
 	len = specs->precision > len ? specs->precision - len : 0;
-	if (specs->plus || sign == '-' || specs->space)
+	if (specs->plus || s == '-' || specs->space)
 		len++;
 	if (!(pad = (char *)malloc(sizeof(char) * len + 1)))
-		return (0);
+		exit(1);
 	pad[len] = '\0';
-	while (--len > 0)
+	while (--len >= 0)
 		pad[len] = '0';
-	if (specs->plus || sign == '-')
-		pad[len] = sign;
+	if (specs->plus || s == '-')
+		pad[len] = s;
 	else
 		pad[len] = ' ';
 	return (ft_strjoin(pad, str));
@@ -72,6 +72,8 @@ int		to_integer(t_specs *specs, va_list argp)
 		nb = va_arg(argp, long long);
 	else
 		nb = va_arg(argp, int);
+	if (!nb)
+		exit(3);
 	sign = nb < 0 ? '-' : '+';
 	if (sign == '-')
 		nb *= -1;
@@ -84,16 +86,7 @@ int		to_unsigned(t_specs *specs, va_list argp)
 	unsigned long long	nb;
 	char				*str;
 
-	if (specs->h)
-		nb = (unsigned short)(va_arg(argp, unsigned int));
-	else if (specs->hh)
-		nb = (unsigned char)(va_arg(argp, unsigned int));
-	else if (specs->l)
-		nb = va_arg(argp, unsigned long);
-	else if (specs->ll)
-		nb = va_arg(argp, unsigned long long);
-	else
-		nb = va_arg(argp, unsigned int);
+	nb = oux_length(specs, argp);
 	str = (diu_format(specs, nb, '+'));
 	return (diu_output(specs, str, ft_strlen(str)));
 }

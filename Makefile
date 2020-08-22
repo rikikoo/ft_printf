@@ -6,14 +6,14 @@
 #    By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/12 13:37:40 by rkyttala          #+#    #+#              #
-#    Updated: 2020/08/22 14:34:08 by rkyttala         ###   ########.fr        #
+#    Updated: 2020/08/22 19:42:34 by rkyttala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_printf
 
 SRC_NAME = ft_printf.c parsers.c validate.c csp.c diu.c octal.c hexadecimal.c \
-			float.c
+			float.c oux_conversion.c
 
 OBJ = $(SRC_NAME:%.c=%.o) main.o
 

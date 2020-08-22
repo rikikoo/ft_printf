@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 18:36:06 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/19 00:11:20 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/22 19:58:32 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		scan_width(char *format, t_specs *specs)
 	if (i > 0)
 	{
 		if (!(width = (char *)malloc(sizeof(char) * i + 1)))
-			return (0);
+			exit(1);
 		width[i] = '\0';
 		i = 0;
 		while (ft_isdigit(format[i]))
@@ -75,7 +75,7 @@ int		scan_precision(char *format, t_specs *specs)
 		if (i > 0)
 		{
 			if (!(prec = (char *)malloc(sizeof(char) * i + 1)))
-				return (0); /* error: malloc error */
+				exit(1);
 			prec[i] = '\0';
 			i = 1;
 			while (ft_isdigit(format[i]))
@@ -121,23 +121,23 @@ int		scan_length(char *format, t_specs *specs)
 void	scan_specifier(char c, t_specs *specs)
 {
 	if (c == 'c')
-		specs->character = 1;
+		specs->type = c;
 	else if (c == 's')
-		specs->string = 1;
+		specs->type = c;
 	else if (c == 'p')
-		specs->pointer = 1;
+		specs->type = c;
 	else if (c == 'f')
-		specs->dbl = 1;
+		specs->type = c;
 	else if (c == 'i' || c == 'd')
-		specs->integer = 1;
+		specs->type = c;
 	else if (c == 'o')
-		specs->octal = 1;
+		specs->type = c;
 	else if (c == 'u')
-		specs->uns = 1;
+		specs->type = c;
 	else if (c == 'x')
-		specs->hex = 1;
+		specs->type = c;
 	else if (c == 'X')
-		specs->hex = 2;
+		specs->type = c;
 	else
-		exit(1); /* directs to error: unknown format specifier */
+		exit(2);
 }

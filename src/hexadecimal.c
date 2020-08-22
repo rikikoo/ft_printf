@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 22:29:59 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/19 15:12:24 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/22 19:36:51 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*add_prefix(t_specs *specs, char *str, int cap)
 	if (specs->precision > len)
 	{
 		if (!(pad = (char *)malloc(sizeof(char) * specs->precision - len + 3)))
-			return (0);
+			exit(1);
 		pad[specs->precision] = '\0';
 		while (++i < specs->precision)
 			pad[i] = '0';
@@ -40,11 +40,11 @@ char	*add_prefix(t_specs *specs, char *str, int cap)
 
 int		to_hex(t_specs *specs, va_list argp, int cap)
 {
-	unsigned int	nb;
-	int				len;
-	char			*str;
+	unsigned long long	nb;
+	int					len;
+	char				*str;
 
-	nb = va_arg(argp, unsigned int);
+	nb = oux_length(specs, argp);
 	if (cap)
 		str = ft_itoa_base(nb, 16, 1);
 	else

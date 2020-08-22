@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:01:38 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 16:30:36 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/22 18:50:55 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		f_output(t_specs *specs, char *str, char sign, int len)
 			ft_putpad(specs->width - len, ' ');
 		if (!specs->minus)
 			ft_putstr(str);
-		return (specs-> width);
+		return (specs->width);
 	}
 	if (!specs->minus)
 		ft_putstr(str);
@@ -51,6 +51,8 @@ int		to_float(t_specs *specs, va_list argp)
 		nb = va_arg(argp, long double);
 	else
 		nb = va_arg(argp, double);
+	if (!nb)
+		exit(3);
 	str = ft_ftoa(nb, specs->precision);
 	if (nb < 0)
 	{

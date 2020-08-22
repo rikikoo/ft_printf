@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 17:04:02 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 14:44:51 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/22 19:59:47 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 int		main(void)
 {
-	int		ret;
-	float	n;
+	int				ret;
+	unsigned long	n;
 
-	n = 0.2;
-	ret = ft_printf("%-10.0f\n", n);
+	n = 7654;
+	ret = ft_printf("%-.6lu\n", n);
 	printf("%d\n\n", ret);
-	ret = printf("%-10.0f\n", n);
+	ret = printf("%-.6lu\n", n);
 	printf("%i\n", ret);
 	return (0);
 }

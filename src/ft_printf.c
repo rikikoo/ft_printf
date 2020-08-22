@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 17:10:58 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/19 23:16:31 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/22 19:54:21 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,7 @@ void	init_specs(t_specs *specs)
 	specs->space = 0;
 	specs->width = 0;
 	specs->precision = -1;
-	specs->character = 0;
-	specs->string = 0;
-	specs->pointer = 0;
-	specs->dbl = 0;
-	specs->integer = 0;
-	specs->octal = 0;
-	specs->uns = 0;
-	specs->hex = 0;
+	specs->type = 0;
 	specs->l = 0;
 	specs->ll = 0;
 	specs->long_dbl = 0;
@@ -68,7 +61,7 @@ int		raw_parse(char *format, t_specs *specs, va_list argp)
 			i++;
 			i += spec_parse(format + i, specs);
 			if (specs->percent == 0)
-				ret += conv_bridge(specs, argp, validate_type(specs));
+				ret += conv_bridge(specs, argp, validate_flags(specs));
 			else
 				ret++;
 		}
@@ -89,9 +82,9 @@ int		ft_printf(const char *format, ...)
 	int		ret;
 
 	if (!format)
-		return (0);
+		return (-1);
 	if (!(specs = (t_specs *)malloc(sizeof(t_specs))))
-		return (0);
+		exit(1);
 	va_start(argp, format);
 	ret = raw_parse((char *)format, specs, argp);
 	va_end(argp);

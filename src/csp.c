@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 17:08:41 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/19 00:20:42 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/22 18:47:53 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,20 @@
 
 int		print_char(t_specs *specs, va_list argp)
 {
-	int		i;
+	char	c;
 
-	i = 0;
+	if (!(c = va_arg(argp, int)))
+		exit(3);
 	if (specs->width < 2)
 	{
-		ft_putchar(va_arg(argp, int));
+		ft_putchar(c);
 		return (1);
 	}
 	else
 	{
 		if (specs->minus)
 			ft_putchar(va_arg(argp, int));
-		while (i < specs->width - 1)
-		{
-			ft_putchar(' ');
-			i++;
-		}
+		ft_putpad(specs->width - 1, ' ');
 		if (!specs->minus)
 			ft_putchar(va_arg(argp, int));
 		return (specs->width);
@@ -58,7 +55,7 @@ int		prep_string(t_specs *specs, va_list argp)
 	char	*str;
 
 	if (!(str = va_arg(argp, char *)))
-		exit(1); /* error: empty argument */
+		exit(3);
 	len = ft_strlen(str);
 	if (specs->precision > 0 && specs->precision < len)
 		return (print_string(specs, str, specs->precision));
@@ -71,7 +68,8 @@ int		print_pointer(t_specs *specs, va_list argp)
 	unsigned long long		ptr;
 	int						len;
 
-	ptr = (unsigned long long)(va_arg(argp, void *));
+	if (!(ptr = (unsigned long long)(va_arg(argp, void *))))
+		exit(3);
 	len = ft_strlen(ft_itoa_base(ptr, 16, 0));
 	if (len >= specs->width)
 	{

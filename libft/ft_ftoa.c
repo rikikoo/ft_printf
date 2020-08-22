@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:36:35 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 14:50:03 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/22 16:35:01 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char		*f_roundup(char *str, int i)
 {
 	long long	n;
 
- 	if (i >= 0 && str[i + 1] >= '5')
+	if (i >= 0 && str[i + 1] >= '5')
 	{
 		if (str[i] != '9')
 			str[i] = str[i] + 1;
@@ -60,7 +60,7 @@ static char		*split_n_join(long double nb, int prec, int int_count)
 	char		*str;
 	char		*ints;
 	char		*decimals;
-	long long 	n;
+	long long	n;
 
 	n = (long long)nb;
 	if (prec == 0)
