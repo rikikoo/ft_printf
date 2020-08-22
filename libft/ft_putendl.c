@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/17 17:04:02 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 14:44:51 by rkyttala         ###   ########.fr       */
+/*   Created: 2019/10/26 15:16:19 by rkyttala          #+#    #+#             */
+/*   Updated: 2019/11/01 14:43:35 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int		main(void)
+void	ft_putendl(char const *s)
 {
-	int		ret;
-	float	n;
+	int		i;
 
-	n = 0.2;
-	ret = ft_printf("%-10.0f\n", n);
-	printf("%d\n\n", ret);
-	ret = printf("%-10.0f\n", n);
-	printf("%i\n", ret);
-	return (0);
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i] != '\0')
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	write(1, "\n", 1);
 }

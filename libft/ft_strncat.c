@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/17 17:04:02 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 14:44:51 by rkyttala         ###   ########.fr       */
+/*   Created: 2019/10/22 18:30:24 by rkyttala          #+#    #+#             */
+/*   Updated: 2019/11/02 18:48:46 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int		main(void)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	int		ret;
-	float	n;
+	size_t		i;
+	size_t		j;
 
-	n = 0.2;
-	ret = ft_printf("%-10.0f\n", n);
-	printf("%d\n\n", ret);
-	ret = printf("%-10.0f\n", n);
-	printf("%i\n", ret);
-	return (0);
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
+		i++;
+	while (j < n && s2[j] != '\0')
+	{
+		s1[i] = s2[j];
+		j++;
+		i++;
+	}
+	s1[i] = '\0';
+	return (s1);
 }

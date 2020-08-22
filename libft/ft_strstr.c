@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/17 17:04:02 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 14:44:51 by rkyttala         ###   ########.fr       */
+/*   Created: 2019/10/23 14:20:36 by rkyttala          #+#    #+#             */
+/*   Updated: 2019/10/24 17:09:24 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int		main(void)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	int		ret;
-	float	n;
+	int		i;
+	int		j;
 
-	n = 0.2;
-	ret = ft_printf("%-10.0f\n", n);
-	printf("%d\n\n", ret);
-	ret = printf("%-10.0f\n", n);
-	printf("%i\n", ret);
+	i = 0;
+	if (needle[i] == '\0')
+		return ((char*)haystack);
+	while (haystack[i] != '\0')
+	{
+		j = 0;
+		while (haystack[i + j] == needle[j])
+		{
+			j++;
+			if (needle[j] == '\0')
+				return ((char*)haystack + i);
+		}
+		i++;
+	}
 	return (0);
 }

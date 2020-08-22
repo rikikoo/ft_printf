@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 19:24:22 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/19 00:22:47 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/22 12:20:40 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	validate_type(t_specs *specs)
 {
 	if (specs->plus && specs->space)
 		specs->space = 0;
-	if ((specs->minus || specs->precision) && specs->zero)
+	if ((specs->minus || (specs->precision > 0 && !specs->dbl)) && specs->zero)
 		specs->zero = 0;
 	if (specs->character)
 		return ('c');
@@ -60,7 +60,7 @@ int		conv_bridge(t_specs *specs, va_list argp, char type)
 		ret = to_hex(specs, argp, 0);
 	else if (type == 'X')
 		ret = to_hex(specs, argp, 1);
-/*	else if (type == 'f')
-		ret = to_float(specs, argp); */
+	else if (type == 'f')
+		ret = to_float(specs, argp);
 	return (ret);
 }

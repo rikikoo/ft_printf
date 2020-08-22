@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/17 17:04:02 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 14:44:51 by rkyttala         ###   ########.fr       */
+/*   Created: 2019/10/23 20:26:47 by rkyttala          #+#    #+#             */
+/*   Updated: 2019/11/06 16:56:58 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int		main(void)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int		ret;
-	float	n;
+	size_t		i;
+	char		tmp[len + 1];
 
-	n = 0.2;
-	ret = ft_printf("%-10.0f\n", n);
-	printf("%d\n\n", ret);
-	ret = printf("%-10.0f\n", n);
-	printf("%i\n", ret);
-	return (0);
+	i = 0;
+	if ((!dst && !src) || !len)
+		return (dst);
+	if (len > 32767)
+		return (dst);
+	else
+	{
+		while (i < len)
+		{
+			tmp[i] = ((char*)src)[i];
+			i++;
+		}
+		i = 0;
+		while (i < len)
+		{
+			((char*)dst)[i] = tmp[i];
+			i++;
+		}
+	}
+	return ((char*)dst);
 }

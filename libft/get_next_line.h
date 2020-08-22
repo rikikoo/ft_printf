@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/17 17:04:02 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 14:44:51 by rkyttala         ###   ########.fr       */
+/*   Created: 2019/11/08 14:13:48 by rkyttala          #+#    #+#             */
+/*   Updated: 2019/12/13 19:38:28 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
-#include <stdio.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 8
+# define FD_MAX 4864
 
-int		main(void)
-{
-	int		ret;
-	float	n;
+# include <unistd.h>
+# include <stdlib.h>
+# include "libft.h"
 
-	n = 0.2;
-	ret = ft_printf("%-10.0f\n", n);
-	printf("%d\n\n", ret);
-	ret = printf("%-10.0f\n", n);
-	printf("%i\n", ret);
-	return (0);
-}
+int		get_next_line(const int fd, char **line);
+
+#endif

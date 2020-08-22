@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/17 17:04:02 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 14:44:51 by rkyttala         ###   ########.fr       */
+/*   Created: 2019/11/04 18:03:30 by rkyttala          #+#    #+#             */
+/*   Updated: 2019/11/05 16:16:05 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int		main(void)
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
-	int		ret;
-	float	n;
+	t_list		*tmp;
+	t_list		*tmp2;
 
-	n = 0.2;
-	ret = ft_printf("%-10.0f\n", n);
-	printf("%d\n\n", ret);
-	ret = printf("%-10.0f\n", n);
-	printf("%i\n", ret);
-	return (0);
+	tmp = *alst;
+	while (tmp != NULL)
+	{
+		tmp2 = tmp->next;
+		del(tmp->content, tmp->content_size);
+		free(tmp);
+		tmp = tmp2;
+	}
+	*alst = NULL;
 }

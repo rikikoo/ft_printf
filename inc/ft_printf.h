@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:57:22 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/19 17:01:04 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/22 16:31:45 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,5 @@ int				o_output_right(t_specs *specs, char *str, int len);
 int				to_hex(t_specs *specs, va_list argp, int cap);
 char			*add_prefix(t_specs *specs, char *str, int cap);
 int				to_float(t_specs *specs, va_list argp);
+int				f_output(t_specs *specs, char *str, char sign, int len);
 #endif

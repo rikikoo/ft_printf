@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/17 17:04:02 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 14:44:51 by rkyttala         ###   ########.fr       */
+/*   Created: 2020/08/20 22:41:37 by rkyttala          #+#    #+#             */
+/*   Updated: 2020/08/20 23:59:04 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int		main(void)
+long long	ft_atoll(const char *str)
 {
-	int		ret;
-	float	n;
+	int			i;
+	int			sign;
+	long long	n;
 
-	n = 0.2;
-	ret = ft_printf("%-10.0f\n", n);
-	printf("%d\n\n", ret);
-	ret = printf("%-10.0f\n", n);
-	printf("%i\n", ret);
-	return (0);
+	i = 0;
+	sign = 1;
+	n = 0;
+	while (str[i] != '\0' && !(ft_isdigit(str[i])))
+		i++;
+	if (i > 0 && str[i - 1] == '-')
+		sign = -1;
+	while (str[i] != '\0')
+	{
+		if (ft_isdigit(str[i]))
+		{
+			n = (n * 10) + (str[i] - 48);
+			i++;
+		}
+		else
+			break ;
+	}
+	return (n * sign);
 }

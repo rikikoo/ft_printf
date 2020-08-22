@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/17 17:04:02 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 14:44:51 by rkyttala         ###   ########.fr       */
+/*   Created: 2019/10/23 14:01:07 by rkyttala          #+#    #+#             */
+/*   Updated: 2019/11/02 17:32:08 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int		main(void)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int		ret;
-	float	n;
+	size_t		i;
 
-	n = 0.2;
-	ret = ft_printf("%-10.0f\n", n);
-	printf("%d\n\n", ret);
-	ret = printf("%-10.0f\n", n);
-	printf("%i\n", ret);
+	i = 0;
+	if ((!s1 && !s2) || n == 0)
+		return (0);
+	while (i < n)
+	{
+		if (((unsigned char*)s1)[i] == ((unsigned char*)s2)[i])
+			i++;
+		else
+			return (((unsigned char*)s1)[i] - ((unsigned char*)s2)[i]);
+	}
 	return (0);
 }

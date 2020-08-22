@@ -6,7 +6,7 @@
 #    By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/12 13:37:40 by rkyttala          #+#    #+#              #
-#    Updated: 2020/08/19 17:01:30 by rkyttala         ###   ########.fr        #
+#    Updated: 2020/08/22 14:34:08 by rkyttala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJ = $(SRC_NAME:%.c=%.o) main.o
 
 DIR_SRC = src/
 
-LIB = ../libft/libft.a
+LIB = libft/libft.a
 
 HEADER = inc/ft_printf.h
 
@@ -30,7 +30,7 @@ MAKEFLAGS += --silent
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C ../libft/
+	make -C libft/
 	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIB) -I $(HEADER)
 
 $(OBJ):
@@ -40,17 +40,17 @@ re: fclean all
 
 clean:
 	rm -rf $(OBJ)
-	make clean -C ../libft/
+	make clean -C libft/
 
 fclean: clean
 	rm -rf $(NAME) a.out a.out.dSYM
-	make fclean -C ../libft/
+	make fclean -C libft/
 
 test:
 	gcc -c main.c -I $(HEADER)
 	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIB) -I $(HEADER)
 
 debug:
-	gcc -g $(SRC_NAME:%.c=$(DIR_SRC)%.c) main.c $(LIB) -I $(HEADER)
+	gcc -g $(SRC_NAME:%.c=$(DIR_SRC)%.c) main.c libft/ft_ftoa.c $(LIB) -I $(HEADER)
 
 .PHONY = all re clean fclean

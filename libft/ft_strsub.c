@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/17 17:04:02 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 14:44:51 by rkyttala         ###   ########.fr       */
+/*   Created: 2019/10/30 11:11:07 by rkyttala          #+#    #+#             */
+/*   Updated: 2019/11/01 21:47:40 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int		main(void)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	int		ret;
-	float	n;
+	size_t		i;
+	char		*sub;
 
-	n = 0.2;
-	ret = ft_printf("%-10.0f\n", n);
-	printf("%d\n\n", ret);
-	ret = printf("%-10.0f\n", n);
-	printf("%i\n", ret);
-	return (0);
+	i = 0;
+	sub = (char*)malloc(sizeof(char) * len + 1);
+	if (sub == NULL)
+		return (0);
+	else
+	{
+		while (i < len)
+		{
+			sub[i] = s[start];
+			start++;
+			i++;
+		}
+		sub[i] = '\0';
+		return (sub);
+	}
 }
