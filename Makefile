@@ -6,20 +6,24 @@
 #    By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/12 13:37:40 by rkyttala          #+#    #+#              #
-#    Updated: 2020/08/22 19:42:34 by rkyttala         ###   ########.fr        #
+#    Updated: 2020/08/24 18:59:57 by rkyttala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf
+NAME = libftprintf.a
+
+LIB = libft.a
 
 SRC_NAME = ft_printf.c parsers.c validate.c csp.c diu.c octal.c hexadecimal.c \
 			float.c oux_conversion.c
 
-OBJ = $(SRC_NAME:%.c=%.o) main.o
+OBJ = $(SRC_NAME:%.c=%.o)
+
+DIR_LIB = libft/
 
 DIR_SRC = src/
 
-LIB = libft/libft.a
+DIR_OBJ = obj/
 
 HEADER = inc/ft_printf.h
 
@@ -31,15 +35,19 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft/
-	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIB) -I $(HEADER)
+	cp $(addprefix $(DIR_LIB), $(LIB)) .
+	mv $(LIB) $(NAME)
+	ar rc $(NAME) $(addprefix $(DIR_OBJ), $(OBJ))
+	ranlib $(NAME)
 
 $(OBJ):
-	gcc $(FLAGS) -c $(SRC_NAME:%.c=$(DIR_SRC)%.c) main.c -I $(HEADER)
+	gcc $(FLAGS) -c $(SRC_NAME:%.c=$(DIR_SRC)%.c) -I $(HEADER)
+	mv $(OBJ) $(DIR_OBJ)
 
 re: fclean all
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf main.o $(addprefix $(DIR_OBJ), $(OBJ))
 	make clean -C libft/
 
 fclean: clean
@@ -47,10 +55,9 @@ fclean: clean
 	make fclean -C libft/
 
 test:
-	gcc -c main.c -I $(HEADER)
-	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIB) -I $(HEADER)
+	gcc $(FLAGS) -o ft_printf main.c $(addprefix $(DIR_SRC), $(SRC)) $(NAME)
 
 debug:
-	gcc -g $(SRC_NAME:%.c=$(DIR_SRC)%.c) main.c libft/ft_ftoa.c $(LIB) -I $(HEADER)
+	gcc -g $(SRC_NAME:%.c=$(DIR_SRC)%.c) main.c $(NAME) -I $(HEADER)
 
 .PHONY = all re clean fclean
