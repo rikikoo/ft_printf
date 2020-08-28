@@ -6,19 +6,18 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 19:24:22 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 19:57:09 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/28 19:02:47 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-char	validate_flags(t_specs *specs)
+void	validate_flags(t_specs *specs)
 {
 	if (specs->plus && specs->space)
 		specs->space = 0;
-	if ((specs->minus || (specs->precision > 0 && specs->type != 'f')))
+	if ((specs->minus || (specs->precision >= 0 && specs->type != 'f')))
 		specs->zero = 0;
-	return (specs->type);
 }
 
 int		conv_bridge(t_specs *specs, va_list argp, char type)
@@ -41,7 +40,9 @@ int		conv_bridge(t_specs *specs, va_list argp, char type)
 		ret = to_hex(specs, argp, 0);
 	else if (type == 'X')
 		ret = to_hex(specs, argp, 1);
-	else
+	else if (type == 'f')
 		ret = to_float(specs, argp);
+	else
+		ret = print_percent(specs);
 	return (ret);
 }

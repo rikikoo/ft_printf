@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:31:58 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/20 23:09:04 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/25 22:04:09 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				ft_memdel(void **ap);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memset(void *b, int c, size_t len);
+int					ft_printf(const char *format, ...);
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putendl(char const *s);
@@ -61,7 +62,7 @@ void				ft_putendl_fd(char const *s, int fd);
 char				*ft_putmaxint(int n);
 void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
-void				ft_putnstr(char *str, int n);
+void				ft_putnstr(const char *str, int n);
 void				ft_putpad(int len, char c);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);

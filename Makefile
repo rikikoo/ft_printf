@@ -6,7 +6,7 @@
 #    By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/12 13:37:40 by rkyttala          #+#    #+#              #
-#    Updated: 2020/08/24 18:59:57 by rkyttala         ###   ########.fr        #
+#    Updated: 2020/08/28 20:41:07 by rkyttala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = libftprintf.a
 
 LIB = libft.a
 
-SRC_NAME = ft_printf.c parsers.c validate.c csp.c diu.c octal.c hexadecimal.c \
-			float.c oux_conversion.c
+SRC_NAME = ft_printf.c parsers.c validate.c csp.c di.c octal.c hexadecimal.c \
+			unsigned.c float.c utils.c
 
 OBJ = $(SRC_NAME:%.c=%.o)
 
@@ -55,9 +55,9 @@ fclean: clean
 	make fclean -C libft/
 
 test:
-	gcc $(FLAGS) -o ft_printf main.c $(addprefix $(DIR_SRC), $(SRC)) $(NAME)
+	gcc $(FLAGS) -o ft_printf main.c $(NAME)
 
 debug:
 	gcc -g $(SRC_NAME:%.c=$(DIR_SRC)%.c) main.c $(NAME) -I $(HEADER)
 
-.PHONY = all re clean fclean
+.PHONY = re clean fclean test debug

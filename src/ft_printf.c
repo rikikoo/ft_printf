@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 17:10:58 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 19:54:21 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/28 16:25:06 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_specs(t_specs *specs)
 {
-	specs->percent = 0;
 	specs->pound = 0;
 	specs->zero = 0;
 	specs->minus = 0;
@@ -38,12 +37,11 @@ int		spec_parse(char *format, t_specs *specs)
 	i = 0;
 	while (scan_flags(format[i], specs))
 		i++;
-	if (i == 0 && specs->percent == 1)
-		return (1);
 	i += scan_width(format + i, specs);
 	i += scan_precision(format + i, specs);
 	i += scan_length(format + i, specs);
 	scan_specifier(format[i], specs);
+	validate_flags(specs);
 	return (i + 1);
 }
 
@@ -60,10 +58,7 @@ int		raw_parse(char *format, t_specs *specs, va_list argp)
 		{
 			i++;
 			i += spec_parse(format + i, specs);
-			if (specs->percent == 0)
-				ret += conv_bridge(specs, argp, validate_flags(specs));
-			else
-				ret++;
+			ret += conv_bridge(specs, argp, specs->type);
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 17:08:41 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 18:47:53 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/27 21:05:20 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int		print_char(t_specs *specs, va_list argp)
 	else
 	{
 		if (specs->minus)
-			ft_putchar(va_arg(argp, int));
+			ft_putchar(c);
 		ft_putpad(specs->width - 1, ' ');
 		if (!specs->minus)
-			ft_putchar(va_arg(argp, int));
+			ft_putchar(c);
 		return (specs->width);
 	}
 }
@@ -57,7 +57,7 @@ int		prep_string(t_specs *specs, va_list argp)
 	if (!(str = va_arg(argp, char *)))
 		exit(3);
 	len = ft_strlen(str);
-	if (specs->precision > 0 && specs->precision < len)
+	if (specs->precision >= 0 && specs->precision < len)
 		return (print_string(specs, str, specs->precision));
 	else
 		return (print_string(specs, str, len));

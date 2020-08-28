@@ -6,7 +6,7 @@
 /*   By: rikikytt <rikikytt@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 23:42:51 by rikikytt          #+#    #+#             */
-/*   Updated: 2020/08/17 23:23:11 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/27 22:00:28 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putpad(int len, char c)
 {
-	if (len < 0)
+	if (len < 1)
 		return ;
 	while (len--)
 		ft_putchar(c);

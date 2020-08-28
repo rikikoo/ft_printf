@@ -6,7 +6,7 @@
 #    By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 11:43:31 by rkyttala          #+#    #+#              #
-#    Updated: 2020/08/24 18:32:21 by rkyttala         ###   ########.fr        #
+#    Updated: 2020/08/27 19:58:10 by rkyttala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ OBJECTS = $(SOURCES:.c=.o)
 
 INCLUDES = libft.h get_next_line.h
 
+MAKEFLAGS += --silent
+
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
@@ -35,10 +37,10 @@ $(OBEJCTS):
 	$(CC) $(CFLAGS) -c $(SOURCES) -I $(INCLUDES)
 
 clean:
-	rm -fv $(OBJECTS)
+	rm -f $(OBJECTS)
 
 fclean: clean
-	rm -fv $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
