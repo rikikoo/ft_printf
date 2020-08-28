@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 17:08:41 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/27 21:05:20 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/28 21:26:30 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int		print_char(t_specs *specs, va_list argp)
 {
 	char	c;
 
-	if (!(c = va_arg(argp, int)))
-		exit(3);
+	c = va_arg(argp, int);
 	if (specs->width < 2)
 	{
 		ft_putchar(c);
@@ -54,8 +53,12 @@ int		prep_string(t_specs *specs, va_list argp)
 	int		len;
 	char	*str;
 
-	if (!(str = va_arg(argp, char *)))
-		exit(3);
+	str = va_arg(argp, char *);
+	if (str == NULL)
+	{
+		ft_putstr("(null)");
+		return (6);
+	}
 	len = ft_strlen(str);
 	if (specs->precision >= 0 && specs->precision < len)
 		return (print_string(specs, str, specs->precision));

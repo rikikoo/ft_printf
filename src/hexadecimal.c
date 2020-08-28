@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 22:29:59 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/27 20:31:55 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/28 21:44:58 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		x_output_r(t_specs *specs, char *str, int len, char *pref)
 	else
 	{
 		ft_putpad(specs->pound ? specs->width - len - 2 \
-			: specs->width-len, ' ');
+			: specs->width - len, ' ');
 		if (specs->pound)
 			ft_putstr(pref);
 		if (specs->precision > len)
@@ -102,7 +102,11 @@ int		to_hex(t_specs *specs, va_list argp, int cap)
 	char				*str;
 	char				prefix[3];
 
-	nb = oux_length(specs, argp);
+	if (!(nb = oux_length(specs, argp)))
+	{
+		ft_putchar('0');
+		return (1);
+	}
 	prefix[0] = '0';
 	prefix[1] = 'x';
 	prefix[2] = '\0';

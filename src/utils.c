@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 19:32:40 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/28 19:35:16 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/28 21:21:32 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ long long				di_length(t_specs *specs, va_list argp)
 	return (nb);
 }
 
-int		is_signed(t_specs *specs, char sign)
+int						is_signed(t_specs *specs, char sign)
 {
 	return (specs->plus || sign == ' ' || sign == '-');
 }
