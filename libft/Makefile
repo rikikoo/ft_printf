@@ -6,7 +6,7 @@
 #    By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 11:43:31 by rkyttala          #+#    #+#              #
-#    Updated: 2020/08/27 19:58:10 by rkyttala         ###   ########.fr        #
+#    Updated: 2020/08/29 05:53:25 by rkyttala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,4 +44,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: $(NAME)
+.PHONY: $(NAME) all clean fclean re
