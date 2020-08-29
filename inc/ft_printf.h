@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:57:22 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/28 21:03:55 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/29 18:36:00 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int					spec_parse(char *format, t_specs *specs);
 void				init_specs(t_specs *specs);
 int					scan_flags(char c, t_specs *specs);
 int					scan_width(char *format, t_specs *specs);
-int					scan_precision(char *format, t_specs *specs);
+int					scan_precision(char *format, t_specs *specs, int i);
 int					scan_length(char *format, t_specs *specs);
 void				scan_specifier(char c, t_specs *specs);
 void				validate_flags(t_specs *specs);
@@ -58,7 +58,7 @@ int					o_output_l(t_specs *specs, char *str, int len);
 int					o_output_r(t_specs *specs, char *str, int len);
 int					to_unsigned(t_specs *specs, va_list argp);
 int					u_output(t_specs *specs, char *str, int len);
-int					to_hex(t_specs *specs, va_list argp, int cap);
+int					to_hex(t_specs *specs, va_list argp, int upper);
 int					x_output_l(t_specs *specs, char *str, int len, char *pref);
 int					x_output_r(t_specs *specs, char *str, int len, char *pref);
 int					x_output(t_specs *specs, char *str, int len, char *pref);
@@ -68,4 +68,5 @@ unsigned long long	oux_length(t_specs *specs, va_list argp);
 long long			di_length(t_specs *specs, va_list argp);
 int					print_percent(t_specs *specs);
 int					is_signed(t_specs *specs, char sign);
+int					ox_zeroprecision(t_specs *specs);
 #endif

@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 19:32:40 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/28 21:21:32 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/29 18:58:02 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,22 @@ long long				di_length(t_specs *specs, va_list argp)
 int						is_signed(t_specs *specs, char sign)
 {
 	return (specs->plus || sign == ' ' || sign == '-');
+}
+
+int						ox_zeroprecision(t_specs *specs)
+{
+	if ((specs->pound && specs->type == 'o') || (specs->precision != 0 && \
+		(specs->type == 'x' || specs->type == 'X')))
+	{
+		if (specs->minus)
+			ft_putchar('0');
+		ft_putpad(specs->width - 1, ' ');
+		if (!specs->minus)
+			ft_putchar('0');
+		return (specs->width > 0 ? specs->width : 1);
+	}
+	ft_putpad(specs->width, ' ');
+	return (specs->width);
 }
 
 int						print_percent(t_specs *specs)

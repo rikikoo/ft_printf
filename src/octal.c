@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 17:09:42 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/27 21:10:29 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/29 18:35:16 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int		to_octal(t_specs *specs, va_list argp)
 	int					len;
 	char				*str;
 
-	nb = oux_length(specs, argp);
+	if (!(nb = oux_length(specs, argp)) && specs->precision == 0)
+		return (ox_zeroprecision(specs));
 	str = ft_itoa_base(nb, 8, 0);
 	len = ft_strlen(str);
 	if (specs->pound && specs->precision < len)

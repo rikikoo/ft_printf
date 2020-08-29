@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 18:36:06 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/27 17:29:06 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/29 17:38:24 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,31 @@ int		scan_width(char *format, t_specs *specs)
 	return (i);
 }
 
-int		scan_precision(char *format, t_specs *specs)
+int		scan_precision(char *format, t_specs *specs, int i)
 {
-	int		i;
-	char	*prec;
+	char	*precision;
 
 	i = 0;
 	if (format[i] == '.')
 	{
 		while (ft_isdigit(format[i + 1]))
 			i++;
-		if (i > 0)
+		if (i == 0)
 		{
-			if (!(prec = (char *)malloc(sizeof(char) * i + 1)))
-				exit(1);
-			prec[i] = '\0';
-			i = 1;
-			while (ft_isdigit(format[i]))
-			{
-				prec[i - 1] = format[i];
-				i++;
-			}
-			specs->precision = ft_atoi(prec);
-			free(prec);
-			prec = NULL;
+			specs->precision = 0;
+			return (1);
 		}
+		if (!(precision = (char *)malloc(sizeof(char) * i + 1)))
+			exit(1);
+		precision[i] = '\0';
+		i = 1;
+		while (ft_isdigit(format[i]))
+		{
+			precision[i - 1] = format[i];
+			i++;
+		}
+		specs->precision = ft_atoi(precision);
+		ft_liberator(1, &precision);
 	}
 	return (i);
 }
@@ -135,5 +135,5 @@ void	scan_specifier(char c, t_specs *specs)
 	else if (c == '%')
 		specs->type = c;
 	else
-		exit(2);
+		ft_putchar(c);
 }

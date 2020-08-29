@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 19:24:22 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/28 19:02:47 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/29 16:46:16 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ void	validate_flags(t_specs *specs)
 {
 	if (specs->plus && specs->space)
 		specs->space = 0;
-	if ((specs->minus || (specs->precision >= 0 && specs->type != 'f')))
+	if (specs->minus || (specs->precision >= 0 && specs->type != 'f'))
 		specs->zero = 0;
+
 }
 
 int		conv_bridge(t_specs *specs, va_list argp, char type)

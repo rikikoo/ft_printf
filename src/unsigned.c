@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:41:46 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/28 21:13:24 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/29 18:22:41 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ int		to_unsigned(t_specs *specs, va_list argp)
 	char				*pad;
 	int					len;
 
-	nb = oux_length(specs, argp);
+	if (!(nb = oux_length(specs, argp)) && specs->precision == 0)
+	{
+		ft_putpad(specs->width, ' ');
+		return (specs->width);
+	}
 	str = ft_itoa_base(nb, 10, 0);
 	len = ft_strlen(str);
 	if (specs->precision > len)

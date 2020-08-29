@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 17:10:58 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/28 16:25:06 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/29 17:37:13 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		spec_parse(char *format, t_specs *specs)
 	while (scan_flags(format[i], specs))
 		i++;
 	i += scan_width(format + i, specs);
-	i += scan_precision(format + i, specs);
+	i += scan_precision(format + i, specs, i);
 	i += scan_length(format + i, specs);
 	scan_specifier(format[i], specs);
 	validate_flags(specs);
@@ -58,7 +58,10 @@ int		raw_parse(char *format, t_specs *specs, va_list argp)
 		{
 			i++;
 			i += spec_parse(format + i, specs);
-			ret += conv_bridge(specs, argp, specs->type);
+			if (!specs->type)
+				ret++;
+			else
+				ret += conv_bridge(specs, argp, specs->type);
 		}
 		else
 		{
