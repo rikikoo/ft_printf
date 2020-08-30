@@ -6,7 +6,7 @@
 #    By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/12 13:37:40 by rkyttala          #+#    #+#              #
-#    Updated: 2020/08/29 17:17:57 by rkyttala         ###   ########.fr        #
+#    Updated: 2020/08/29 21:30:05 by rkyttala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,13 +51,13 @@ clean:
 	make clean -C libft/
 
 fclean: clean
-	rm -rf $(NAME) a.out a.out.dSYM
+	rm -rf $(NAME) ft_printf a.out a.out.dSYM
 	make fclean -C libft/
 
 test:
-	gcc $(FLAGS) -o ft_printf main.c $(NAME)
+	gcc -o ft_printf main.c $(NAME)
 
 debug:
 	gcc -g $(SRC_NAME:%.c=$(DIR_SRC)%.c) main.c $(NAME) -I $(HEADER)
 
-.PHONY = all re clean fclean test debug
+# .PHONY = all re clean fclean test debug

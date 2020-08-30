@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 22:29:59 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 18:34:52 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:25:44 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int		x_output_l(t_specs *specs, char *str, int len, char *pref)
 		if (specs->precision > len)
 			ft_putpad(specs->precision - len, '0');
 		ft_putstr(str);
-		ft_putpad((specs->pound ? specs->width - len - 2 \
-			: specs->width - len), ' ');
+		ft_putpad((specs->precision > len ? specs->width - specs->precision - \
+			(specs->pound * 2) : specs->width - len - (specs->pound * 2)), ' ');
 		if (specs->width >= specs->precision + (specs->pound ? 2 : 0))
 			ret = specs->width;
 		else
@@ -55,8 +55,8 @@ int		x_output_r(t_specs *specs, char *str, int len, char *pref)
 	}
 	else
 	{
-		ft_putpad(specs->pound ? specs->width - len - 2 \
-			: specs->width - len, ' ');
+		ft_putpad(specs->precision > len ? specs->width - specs->precision - \
+			(specs->pound * 2) : specs->width - len - (specs->pound * 2), ' ');
 		if (specs->pound)
 			ft_putstr(pref);
 		if (specs->precision > len)

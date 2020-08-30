@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 19:10:23 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 18:21:41 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/29 19:12:45 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int		to_integer(t_specs *specs, va_list argp)
 	if (!(nb = di_length(specs, argp)) && specs->precision == 0)
 	{
 		ft_putpad(specs->width, ' ');
-		return (specs->width);		
+		return (specs->width);
 	}
 	sign = (nb < 0 ? '-' : '+');
 	if (sign == '-')

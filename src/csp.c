@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 17:08:41 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 06:07:51 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:33:22 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		print_char(t_specs *specs, va_list argp)
 	{
 		if (specs->minus)
 			ft_putchar(c);
-		ft_putpad(specs->width - 1, ' ');
+		ft_putpad(specs->width - 1, specs->zero ? '0' : ' ');
 		if (!specs->minus)
 			ft_putchar(c);
 		return (specs->width);
@@ -39,7 +39,7 @@ int		print_string(t_specs *specs, char *str, int len)
 	{
 		if (specs->minus)
 			ft_putnstr(str, len);
-		ft_putpad(specs->width - len, ' ');
+		ft_putpad(specs->width - len, specs->zero ? '0' : ' ');
 		if (!specs->minus)
 			ft_putnstr(str, len);
 		return (specs->width);
@@ -67,26 +67,24 @@ int		print_pointer(t_specs *specs, va_list argp)
 {
 	unsigned long long		ptr;
 	int						len;
+	char					*str;
 
 	if (!(ptr = (unsigned long long)(va_arg(argp, void *))))
-		exit(3);
-	len = ft_strlen(ft_itoa_base(ptr, 16, 0));
+		ptr = 0;
+	if (ptr == 0 && specs->precision == 0)
+		str = "0x";
+	else
+		str = ft_strjoin("0x", ft_itoa_base(ptr, 16, 0));
+	len = ft_strlen(str);
 	if (len >= specs->width)
 	{
-		ft_putstr("0x");
-		ft_putstr(ft_itoa_base(ptr, 16, 0));
-		return (len + 2);
+		ft_putstr(str);
+		return (len);
 	}
 	if (specs->minus)
-	{
-		ft_putstr("0x");
-		ft_putstr(ft_itoa_base(ptr, 16, 0));
-	}
-	ft_putpad(specs->width - len - 2, ' ');
+		ft_putstr(str);
+	ft_putpad(specs->width - len, ' ');
 	if (!specs->minus)
-	{
-		ft_putstr("0x");
-		ft_putstr(ft_itoa_base(ptr, 16, 0));
-	}
+		ft_putstr(str);
 	return (specs->width);
 }

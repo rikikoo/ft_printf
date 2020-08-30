@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 19:32:40 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 18:58:02 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:39:13 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ int						is_signed(t_specs *specs, char sign)
 
 int						ox_zeroprecision(t_specs *specs)
 {
-	if ((specs->pound && specs->type == 'o') || (specs->precision != 0 && \
-		(specs->type == 'x' || specs->type == 'X')))
+	if (specs->pound && specs->type == 'o')
 	{
 		if (specs->minus)
 			ft_putchar('0');
@@ -62,6 +61,20 @@ int						ox_zeroprecision(t_specs *specs)
 		if (!specs->minus)
 			ft_putchar('0');
 		return (specs->width > 0 ? specs->width : 1);
+	}
+	if ((specs->type == 'x' || specs->type == 'X') && specs->precision != 0)
+	{
+		if (specs->minus)
+			ft_putpad(specs->precision > 1 ? specs->precision : 1, '0');
+		if (specs->precision == -1)
+			ft_putpad(specs->width - 1, specs->zero ? '0' : ' ');
+		else
+			ft_putpad(specs->width - specs->precision, specs->zero ? '0' : ' ');
+		if (!specs->minus)
+			ft_putpad(specs->precision > 1 ? specs->precision : 1, '0');
+		if (specs->precision > specs->width)
+			return (specs->precision > 1 ? specs->precision : 1);
+		return (specs->width > 1 ? specs->width : 1);
 	}
 	ft_putpad(specs->width, ' ');
 	return (specs->width);

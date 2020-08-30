@@ -6,11 +6,20 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 19:24:22 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 16:46:16 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/29 22:04:15 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
+
+int		is_validspec(char c)
+{
+	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' || c == 'o' \
+	|| c == 'u' || c == 'x' || c == 'X' || c == 'f' || c == '%')
+		return (1);
+	else
+		return (0);
+}
 
 void	validate_flags(t_specs *specs)
 {
@@ -18,7 +27,6 @@ void	validate_flags(t_specs *specs)
 		specs->space = 0;
 	if (specs->minus || (specs->precision >= 0 && specs->type != 'f'))
 		specs->zero = 0;
-
 }
 
 int		conv_bridge(t_specs *specs, va_list argp, char type)

@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:57:22 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 18:36:00 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/29 22:01:24 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int					scan_width(char *format, t_specs *specs);
 int					scan_precision(char *format, t_specs *specs, int i);
 int					scan_length(char *format, t_specs *specs);
 void				scan_specifier(char c, t_specs *specs);
+int					is_validspec(char c);
 void				validate_flags(t_specs *specs);
 int					conv_bridge(t_specs *specs, va_list argp, char type);
 int					print_char(t_specs *specs, va_list argp);

@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:36:35 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 16:35:01 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/30 19:35:03 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static char		*f_roundup(char *str, int i)
 {
-	long long	n;
-
 	if (i >= 0 && str[i + 1] >= '5')
 	{
 		if (str[i] != '9')
@@ -25,19 +23,17 @@ static char		*f_roundup(char *str, int i)
 			while (i - 1 >= 0)
 			{
 				str[i] = '0';
-				if (str[i - 1] == '9')
-					i--;
-				else
+				if (str[i - 1] != '9')
+				{
 					str[i - 1] = str[i - 1] + 1;
+					break ;
+				}
+				i--;
 			}
 		}
 	}
 	if (i == 0)
-	{
-		n = ft_atoll(str);
-		n++;
-		str = ft_itoa_base(n, 10, 0);
-	}
+		str = ft_itoa_base((ft_atoll(str) + 1), 10, 0);
 	return (str);
 }
 

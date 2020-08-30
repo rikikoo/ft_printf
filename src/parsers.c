@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 18:36:06 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 17:38:24 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/29 22:07:16 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ int		scan_width(char *format, t_specs *specs)
 			i++;
 		}
 		if (i > 0)
-			specs->width += ft_atoi(width);
-		free(width);
-		width = NULL;
+			specs->width = ft_atoi(width);
+		ft_liberator(1, &width);
 	}
 	return (i);
 }
@@ -114,26 +113,11 @@ int		scan_length(char *format, t_specs *specs)
 
 void	scan_specifier(char c, t_specs *specs)
 {
-	if (c == 'c')
+	if (is_validspec(c))
 		specs->type = c;
-	else if (c == 's')
-		specs->type = c;
-	else if (c == 'p')
-		specs->type = c;
-	else if (c == 'f')
-		specs->type = c;
-	else if (c == 'i' || c == 'd')
-		specs->type = c;
-	else if (c == 'o')
-		specs->type = c;
-	else if (c == 'u')
-		specs->type = c;
-	else if (c == 'x')
-		specs->type = c;
-	else if (c == 'X')
-		specs->type = c;
-	else if (c == '%')
-		specs->type = c;
-	else
+	else if (c != '\0')
+	{
 		ft_putchar(c);
+		specs->type = '?';
+	}
 }

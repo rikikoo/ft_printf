@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 17:10:58 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 17:37:13 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/29 22:18:27 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int		spec_parse(char *format, t_specs *specs)
 {
 	int		i;
 
-	init_specs(specs);
 	i = 0;
+	init_specs(specs);
 	while (scan_flags(format[i], specs))
 		i++;
 	i += scan_width(format + i, specs);
@@ -42,7 +42,10 @@ int		spec_parse(char *format, t_specs *specs)
 	i += scan_length(format + i, specs);
 	scan_specifier(format[i], specs);
 	validate_flags(specs);
-	return (i + 1);
+	if (format[i] == '\0')
+		return (i);
+	else
+		return (i + 1);
 }
 
 int		raw_parse(char *format, t_specs *specs, va_list argp)
@@ -58,10 +61,10 @@ int		raw_parse(char *format, t_specs *specs, va_list argp)
 		{
 			i++;
 			i += spec_parse(format + i, specs);
-			if (!specs->type)
-				ret++;
-			else
+			if (is_validspec(specs->type))
 				ret += conv_bridge(specs, argp, specs->type);
+			else if (specs->type == '?')
+				ret++;
 		}
 		else
 		{
@@ -82,7 +85,7 @@ int		ft_printf(const char *format, ...)
 	if (!format)
 		return (-1);
 	if (!(specs = (t_specs *)malloc(sizeof(t_specs))))
-		exit(1);
+		return (-1);
 	va_start(argp, format);
 	ret = raw_parse((char *)format, specs, argp);
 	va_end(argp);
