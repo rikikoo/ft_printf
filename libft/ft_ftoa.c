@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:36:35 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/30 19:35:03 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/30 20:12:37 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ static char		*format_decimals(char *decimals)
 
 static char		*split_n_join(long double nb, int prec, int int_count)
 {
-	char		*str;
-	char		*ints;
-	char		*decimals;
-	long long	n;
+	char				*str;
+	char				*ints;
+	char				*decimals;
+	unsigned long long	n;
 
 	n = (long long)nb;
 	if (prec == 0)
@@ -70,7 +70,7 @@ static char		*split_n_join(long double nb, int prec, int int_count)
 		nb *= 10.0;
 		prec--;
 	}
-	n = (long long)nb;
+	n = (unsigned long long)nb;
 	str = ft_itoa_base(n, 10, 0);
 	str = f_roundup(str, ft_strlen(str) - 2);
 	ints = ft_strndup(str, int_count);
