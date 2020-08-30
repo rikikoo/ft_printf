@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 19:32:40 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/30 18:39:13 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/30 21:13:26 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int						is_signed(t_specs *specs, char sign)
 	return (specs->plus || sign == ' ' || sign == '-');
 }
 
-int						ox_zeroprecision(t_specs *specs)
+int						oux_zeroprecision(t_specs *specs)
 {
 	if (specs->pound && specs->type == 'o')
 	{

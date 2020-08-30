@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 18:21:53 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/22 13:24:00 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/30 23:09:39 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ void	ft_liberator(int n, ...)
 	while (n)
 	{
 		ptr = va_arg(ap, void **);
-		free(*ptr);
-		*ptr = NULL;
+		if (ptr != NULL)
+		{
+			free(*ptr);
+			*ptr = NULL;
+		}
 		n--;
 	}
 	va_end(ap);

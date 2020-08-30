@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:57:22 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 22:01:24 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/30 21:14:25 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int					x_output_r(t_specs *specs, char *str, int len, char *pref);
 int					x_output(t_specs *specs, char *str, int len, char *pref);
 int					to_float(t_specs *specs, va_list argp);
 int					f_output(t_specs *specs, char *str, char sign, int len);
+int					oux_zeroprecision(t_specs *specs);
 unsigned long long	oux_length(t_specs *specs, va_list argp);
 long long			di_length(t_specs *specs, va_list argp);
 int					print_percent(t_specs *specs);
 int					is_signed(t_specs *specs, char sign);
-int					ox_zeroprecision(t_specs *specs);
 #endif

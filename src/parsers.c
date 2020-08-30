@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 18:36:06 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 22:07:16 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/30 22:36:28 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ int		scan_width(char *format, t_specs *specs)
 		i++;
 	if (i > 0)
 	{
-		if (!(width = (char *)malloc(sizeof(char) * i + 1)))
+		if (!(width = ft_strnew(i)))
 			exit(1);
-		width[i] = '\0';
 		i = 0;
 		while (ft_isdigit(format[i]))
 		{
@@ -69,9 +68,8 @@ int		scan_precision(char *format, t_specs *specs, int i)
 			specs->precision = 0;
 			return (1);
 		}
-		if (!(precision = (char *)malloc(sizeof(char) * i + 1)))
+		if (!(precision = ft_strnew(i)))
 			exit(1);
-		precision[i] = '\0';
 		i = 1;
 		while (ft_isdigit(format[i]))
 		{
@@ -79,6 +77,8 @@ int		scan_precision(char *format, t_specs *specs, int i)
 			i++;
 		}
 		specs->precision = ft_atoi(precision);
+		free(precision);
+		precision = NULL;
 		ft_liberator(1, &precision);
 	}
 	return (i);

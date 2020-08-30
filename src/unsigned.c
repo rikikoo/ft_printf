@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:41:46 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 18:22:41 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/30 22:46:34 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,25 @@ int		u_output(t_specs *specs, char *str, int len)
 int		to_unsigned(t_specs *specs, va_list argp)
 {
 	unsigned long long	nb;
-	char				*str;
+	char				*tmp;
 	char				*pad;
+	char				*str;
 	int					len;
 
 	if (!(nb = oux_length(specs, argp)) && specs->precision == 0)
-	{
-		ft_putpad(specs->width, ' ');
-		return (specs->width);
-	}
-	str = ft_itoa_base(nb, 10, 0);
-	len = ft_strlen(str);
+		return (oux_zeroprecision(specs));
+	tmp = ft_itoa_base(nb, 10, 0);
+	len = ft_strlen(tmp);
 	if (specs->precision > len)
 	{
-		if (!(pad = (char *)malloc(sizeof(char) * specs->precision - len + 1)))
+		if (!(pad = ft_strnew(specs->precision - len)))
 			exit(1);
 		len = specs->precision - len;
-		pad[len] = '\0';
 		while (len--)
 			pad[len] = '0';
-		str = ft_strjoin(pad, str);
-		free(pad);
-		pad = NULL;
+		str = ft_strjoin(pad, tmp);
+		ft_liberator(1, &pad);
+		return (u_output(specs, str, ft_strlen(str)));
 	}
-	return (u_output(specs, str, ft_strlen(str)));
+	return (u_output(specs, tmp, ft_strlen(tmp)));
 }

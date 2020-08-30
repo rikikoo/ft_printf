@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 22:29:59 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/30 18:25:44 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/30 21:20:50 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,19 @@ int		to_hex(t_specs *specs, va_list argp, int upper)
 	char				*prefix;
 
 	if (!(nb = oux_length(specs, argp)))
-		return (ox_zeroprecision(specs));
-	prefix = ft_strdup("0x");
+		return (oux_zeroprecision(specs));
+	if (!(prefix = (char *)malloc(sizeof(char) * 3)))
+		exit(1);
 	if (upper)
 	{
 		str = ft_itoa_base(nb, 16, 1);
-		prefix[1] = 'X';
+		prefix = ft_strcpy(prefix, "0X");
 	}
 	else
+	{
 		str = ft_itoa_base(nb, 16, 0);
+		prefix = ft_strcpy(prefix, "0x");
+	}
 	len = ft_strlen(str);
 	if (specs->width > len && specs->width > specs->precision && !specs->minus)
 		return (x_output_r(specs, str, len, prefix));

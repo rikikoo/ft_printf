@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 17:09:42 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/30 18:46:15 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/08/30 22:50:46 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,25 @@ int		to_octal(t_specs *specs, va_list argp)
 {
 	unsigned long long	nb;
 	int					len;
+	char				*tmp;
 	char				*str;
 
 	if (!(nb = oux_length(specs, argp)) && specs->precision == 0)
-		return (ox_zeroprecision(specs));
+		return (oux_zeroprecision(specs));
 	if (nb == 0)
 		specs->pound = 0;
-	str = ft_itoa_base(nb, 8, 0);
-	len = ft_strlen(str);
+	tmp = ft_itoa_base(nb, 8, 0);
+	len = ft_strlen(tmp);
 	if (specs->pound && specs->precision < len)
 	{
-		str = ft_strjoin("0", str);
+		str = ft_strjoin("0", tmp);
 		len++;
+		if (specs->minus)
+			return (o_output_l(specs, str, len));
+		return (o_output_r(specs, str, len));
 	}
 	if (specs->minus)
-		return (o_output_l(specs, str, len));
+		return (o_output_l(specs, tmp, len));
 	else
-		return (o_output_r(specs, str, len));
+		return (o_output_r(specs, tmp, len));
 }
