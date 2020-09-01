@@ -105,7 +105,7 @@ char				*tmp;
 
 	if (!(nb = oux_length(specs, argp)))
 		return (oux_zeroprecision(specs));
-	if (!(prefix = (char *)malloc(sizeof(char) * 3)))
+	if (!(tmp = (char *)malloc(sizeof(char) * 3)))
 		exit(1);
 	if (upper)
 		tmp = ft_strcpy(prefix, "0X");
