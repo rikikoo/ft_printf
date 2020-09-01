@@ -101,21 +101,20 @@ int		to_hex(t_specs *specs, va_list argp, int upper)
 	int					len;
 	char				*str;
 	char				*prefix;
+char				*tmp;
 
 	if (!(nb = oux_length(specs, argp)))
 		return (oux_zeroprecision(specs));
 	if (!(prefix = (char *)malloc(sizeof(char) * 3)))
 		exit(1);
 	if (upper)
-	{
-		str = ft_itoa_base(nb, 16, 1);
-		prefix = ft_strcpy(prefix, "0X");
-	}
+		tmp = ft_strcpy(prefix, "0X");
 	else
-	{
-		str = ft_itoa_base(nb, 16, 0);
-		prefix = ft_strcpy(prefix, "0x");
-	}
+		tmp = ft_strcpy(prefix, "0x");
+prefix = tmp;
+free(tmp);
+tmp = NULL;
+	str = ft_itoa_base(nb, 16, upper);
 	len = ft_strlen(str);
 	if (specs->width > len && specs->width > specs->precision && !specs->minus)
 		return (x_output_r(specs, str, len, prefix));
