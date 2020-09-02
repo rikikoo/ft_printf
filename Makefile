@@ -6,7 +6,7 @@
 #    By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/12 13:37:40 by rkyttala          #+#    #+#              #
-#    Updated: 2020/08/30 20:45:43 by rkyttala         ###   ########.fr        #
+#    Updated: 2020/09/01 20:08:10 by rkyttala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,9 +55,11 @@ fclean: clean
 	make fclean -C libft/
 
 test:
+	mv main.c.test main.c
 	gcc -o ft_printf main.c $(NAME)
+	mv main.c main.c.test
 
 debug:
 	gcc -g $(SRC_NAME:%.c=$(DIR_SRC)%.c) main.c $(NAME) -I $(HEADER)
 
-.PHONY = test debug
+.PHONY = all re clean fclean

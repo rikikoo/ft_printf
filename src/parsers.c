@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 18:36:06 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/30 22:36:28 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/01 19:24:09 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ int		scan_precision(char *format, t_specs *specs, int i)
 			i++;
 		}
 		specs->precision = ft_atoi(precision);
-		free(precision);
-		precision = NULL;
 		ft_liberator(1, &precision);
 	}
 	return (i);

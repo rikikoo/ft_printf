@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 17:10:58 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 22:18:27 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/01 20:10:56 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,7 @@ int		ft_printf(const char *format, ...)
 	va_start(argp, format);
 	ret = raw_parse((char *)format, specs, argp);
 	va_end(argp);
+	free(specs);
+	specs = NULL;
 	return (ret);
 }

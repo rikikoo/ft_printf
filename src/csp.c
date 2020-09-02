@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 17:08:41 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/30 22:09:57 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/01 20:56:37 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,16 @@ int		prep_string(t_specs *specs, va_list argp)
 
 int		print_pointer(t_specs *specs, va_list argp)
 {
-	unsigned long long		ptr;
-	int						len;
-	char					*str;
+	unsigned long long	ptr;
+	int					len;
+	char				*str;
 
 	if (!(ptr = (unsigned long long)(va_arg(argp, void *))))
 		ptr = 0;
 	if (ptr == 0 && specs->precision == 0)
-		str = "0x";
+		str = ft_strdup_free("0x");
 	else
-		str = ft_strjoin("0x", ft_itoa_base(ptr, 16, 0));
+		str = ft_strjoin_free("0x", ft_itoa_base(ptr, 16, 0));
 	len = ft_strlen(str);
 	if (len >= specs->width)
 	{

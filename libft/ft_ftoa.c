@@ -6,18 +6,20 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:36:35 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/09/01 18:25:18 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/01 19:39:14 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
+**	f_roundup:
 **	- Takes a float value that has been turned into a sequence of numbers,
 **	  represented as characters in a string and the amount of decimals.
 **	- Returns a string that has been rounded up, as if the string was
 **	  originally an integer.
 */
+
 static char		*f_roundup(char *str, int i)
 {
 	if (i >= 0 && str[i + 1] >= '5')
@@ -44,10 +46,12 @@ static char		*f_roundup(char *str, int i)
 }
 
 /*
+**	format_decimals:
 **	- Takes a char pointer that points to the first decimal number character
 **	- Moves all elements forward by 1 and places a decimal point to the start
 **	- Returns the newly formatted decimal part
 */
+
 static char		*format_decimals(char *decimals)
 {
 	int		len;
@@ -63,6 +67,7 @@ static char		*format_decimals(char *decimals)
 }
 
 /*
+**	split_n_join:
 **	param1: original float value
 **	param2: desired precision
 **	param3: amount of numbers on the left side of the decimal point
@@ -74,6 +79,7 @@ static char		*format_decimals(char *decimals)
 **	  based on the given integer count
 **	- joins them together, formatted properly and returns it
 */
+
 static char		*split_n_join(long double nb, int prec, int int_count, int olt1)
 {
 	char				*str;
@@ -105,13 +111,14 @@ static char		*split_n_join(long double nb, int prec, int int_count, int olt1)
 **	ft_ftoa takes a float and returns its value with the desired precision
 **	as a string.
 **
-**	This first function
+**	ft_ftoa:
 **	- temporarily gets rid of the sign (if negative),
 **	- counts the amount of integers
 **	- sends that data onward for further processing,
 **	- attaches the possible negative sign and
 **	- returns the processed (rounded up) string.
 */
+
 char			*ft_ftoa(long double nb, int precision)
 {
 	char			sign;

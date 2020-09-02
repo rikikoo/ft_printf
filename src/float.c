@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:01:38 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/09/01 14:06:00 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/01 19:23:14 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		to_float(t_specs *specs, va_list argp)
 		nb = va_arg(argp, long double);
 	else
 		nb = va_arg(argp, double);
-	if (nb ==  0.0 && specs->precision > 0)
+	if (nb == 0.0 && specs->precision > 0)
 		str = f_zero(specs->precision);
 	else
 		str = ft_ftoa(nb, specs->precision);

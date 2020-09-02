@@ -6,7 +6,7 @@
 /*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/30 21:29:44 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/30 22:55:53 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/01 20:43:40 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*ft_strdup_free(char *s1)
 {
 	int		len;
 	char	*s2;
+	char	*tmp;
 
 	len = 0;
 	while (s1[len] != '\0')
@@ -29,7 +30,8 @@ char	*ft_strdup_free(char *s1)
 		len++;
 	}
 	s2[len] = '\0';
-	free(s1);
-	s1 = NULL;
-	return (s2);
+	tmp = s2;
+	free(s2);
+	s2 = NULL;
+	return (tmp);
 }

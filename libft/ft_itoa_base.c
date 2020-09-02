@@ -6,7 +6,7 @@
 /*   By: rikikytt <rikikytt@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 21:26:10 by rikikytt          #+#    #+#             */
-/*   Updated: 2020/08/22 14:53:33 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/01 20:27:17 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static char		*convert_base(unsigned long long n, int base, int len, int cap)
 {
-	unsigned long long		tmp;
-	char					*nb;
-	char					*str;
+	unsigned long long	tmp;
+	char				*nb;
+	char				*str;
+	char				*ret;
 
 	tmp = n;
 	nb = "0123456789abcdef";
@@ -34,7 +35,8 @@ static char		*convert_base(unsigned long long n, int base, int len, int cap)
 			str[len] = nb[tmp];
 		len--;
 	}
-	return (str);
+	ret = str;
+	return (ret);
 }
 
 char			*ft_itoa_base(unsigned long long n, int base, int cap)
