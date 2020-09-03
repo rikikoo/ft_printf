@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   liberator.c                                        :+:      :+:    :+:   */
+/*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkyttala <rkyttala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/20 18:21:53 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/09/02 22:08:13 by rkyttala         ###   ########.fr       */
+/*   Created: 2020/09/02 17:42:17 by rkyttala          #+#    #+#             */
+/*   Updated: 2020/09/03 16:36:00 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "inc/ft_printf.h"
+#include <stdio.h>
 
-void	ft_liberator(int n, ...)
+int		main()
 {
-	va_list		ap;
-	void		**ptr;
+	int		ret;
+	double	p = -20.0;
 
-	va_start(ap, n);
-	while (n)
-	{
-		ptr = va_arg(ap, void **);
-		if (ptr != NULL)
-		{
-			free(*ptr);
-			*ptr = NULL;
-		}
-		n--;
-	}
-	va_end(ap);
+	ret = ft_printf("'%#20.f'\n", p);
+	printf("%d\n\n", ret);
+	ret = printf("'%#20.f'\n", p);
+	printf("%d\n", ret);
+
 }

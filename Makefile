@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+         #
+#    By: rkyttala <rkyttala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/12 13:37:40 by rkyttala          #+#    #+#              #
-#    Updated: 2020/09/01 20:08:10 by rkyttala         ###   ########.fr        #
+#    Updated: 2020/09/02 16:47:05 by rkyttala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,6 @@ DIR_LIB = libft/
 
 DIR_SRC = src/
 
-DIR_OBJ = obj/
-
 HEADER = inc/ft_printf.h
 
 FLAGS = -Wall -Wextra -Werror
@@ -37,17 +35,16 @@ $(NAME): $(OBJ)
 	make -C libft/
 	cp $(addprefix $(DIR_LIB), $(LIB)) .
 	mv $(LIB) $(NAME)
-	ar rc $(NAME) $(addprefix $(DIR_OBJ), $(OBJ))
+	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
 $(OBJ):
 	gcc $(FLAGS) -c $(SRC_NAME:%.c=$(DIR_SRC)%.c) -I $(HEADER)
-	mv $(OBJ) $(DIR_OBJ)
 
 re: fclean all
 
 clean:
-	rm -rf main.o $(addprefix $(DIR_OBJ), $(OBJ))
+	rm -rf main.o $(OBJ)
 	make clean -C libft/
 
 fclean: clean
@@ -55,9 +52,7 @@ fclean: clean
 	make fclean -C libft/
 
 test:
-	mv main.c.test main.c
 	gcc -o ft_printf main.c $(NAME)
-	mv main.c main.c.test
 
 debug:
 	gcc -g $(SRC_NAME:%.c=$(DIR_SRC)%.c) main.c $(NAME) -I $(HEADER)

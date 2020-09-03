@@ -3,25 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rikikytt <rikikytt@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rikikytt <rikikytt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 21:26:10 by rikikytt          #+#    #+#             */
-/*   Updated: 2020/09/01 20:27:17 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/03 11:47:49 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*convert_base(unsigned long long n, int base, int len, int cap)
+static int		count_length(unsigned long long n, int base)
 {
-	unsigned long long	tmp;
-	char				*nb;
-	char				*str;
-	char				*ret;
+	int		len;
 
+	len = 0;
+	while (n > 0)
+	{
+		n = n / base;
+		len++;
+	}
+	return (len);
+}
+
+char			*ft_itoa_base(unsigned long long n, int base, int upper)
+{
+	int					len;
+	unsigned long long	tmp;
+	char				*str;
+	char				*nb;
+
+	len = count_length(n, base);
 	tmp = n;
 	nb = "0123456789abcdef";
-	if (!(str = (char *)malloc(sizeof(char) * len) + 1))
+	if (n == 0)
+		return (ft_strdup("0"));
+	if (base < 2 || base > 16)
+		return (0);
+	if (!(str = (char *)malloc(sizeof(char) * len + 1)))
 		return (0);
 	str[len] = '\0';
 	len--;
@@ -29,31 +47,8 @@ static char		*convert_base(unsigned long long n, int base, int len, int cap)
 	{
 		tmp = n % base;
 		n = n / base;
-		if (cap > 0 && tmp >= 10)
-			str[len] = nb[tmp] - 32;
-		else
-			str[len] = nb[tmp];
+		str[len] = (upper > 0 && tmp >= 10) ? nb[tmp] - 32 : nb[tmp];
 		len--;
 	}
-	ret = str;
-	return (ret);
-}
-
-char			*ft_itoa_base(unsigned long long n, int base, int cap)
-{
-	int						len;
-	unsigned long long		tmp;
-
-	len = 0;
-	tmp = n;
-	if (n == 0)
-		return ("0");
-	if (base < 2 || base > 16)
-		return (0);
-	while (tmp > 0)
-	{
-		tmp = tmp / base;
-		len++;
-	}
-	return (convert_base(n, base, len, cap));
+	return (str);
 }

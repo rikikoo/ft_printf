@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rkyttala <rkyttala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:31:58 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/30 21:44:55 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/03 13:02:00 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int					ft_isdigit(int c);
 int					ft_ismaxint(int n);
 int					ft_isprint(int c);
 char				*ft_itoa(int n);
-char				*ft_itoa_base(unsigned long long n, int base, int cap);
+char				*ft_itoa_base(unsigned long long n, int base, int upper);
 void				ft_liberator(int n, ...);
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
@@ -79,7 +79,8 @@ int					ft_strnequ(char const *s1, char const *s2, size_t n);
 void				ft_striter(char *s, void (*f)(char*));
 void				ft_striteri(char *s, void (*f)(unsigned int, char*));
 char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strjoin_free(const char *s1, char *s2);
+char				*ft_strjoin_free(char *s1, char *s2);
+char				*ft_strjoin_free2nd(const char *s1, char *s2);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t				ft_strlen(const char *s);
 char				*ft_strmap(char const *s, char (*f)(char));

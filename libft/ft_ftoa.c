@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ftoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rkyttala <rkyttala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 23:36:35 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/09/01 19:39:14 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/03 15:48:14 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+**	round_wholes:
+**	- exists only because of school's max 25 lines per function limit
+**	1) turns string into long long int
+**	2) increments it by one
+**	3) converts it back to a string
+**	4) frees original string
+*/
+
+static char		*round_wholes(char **str)
+{
+	char	*rounded;
+
+	rounded = ft_itoa_base((ft_atoll(*str) + 1), 10, 0);
+	free(*str);
+	return (rounded);
+}
 
 /*
 **	f_roundup:
@@ -20,8 +38,11 @@
 **	  originally an integer.
 */
 
-static char		*f_roundup(char *str, int i)
+static char		*f_roundup(char *str)
 {
+	int		i;
+
+	i = (ft_strlen(str) - 2);
 	if (i >= 0 && str[i + 1] >= '5')
 	{
 		if (str[i] != '9')
@@ -41,14 +62,16 @@ static char		*f_roundup(char *str, int i)
 		}
 	}
 	if (i == 0)
-		str = ft_itoa_base((ft_atoll(str) + 1), 10, 0);
-	return (str);
+		return (round_wholes(&str));
+	else
+		return (str);
 }
 
 /*
 **	format_decimals:
 **	- Takes a char pointer that points to the first decimal number character
-**	- Moves all elements forward by 1 and places a decimal point to the start
+**	- Moves all elements forward by 1 and places a decimal point to the start,
+**	  thus removing the last "extra" decimal which was used only for rounding up
 **	- Returns the newly formatted decimal part
 */
 
@@ -83,9 +106,8 @@ static char		*format_decimals(char *decimals)
 static char		*split_n_join(long double nb, int prec, int int_count, int olt1)
 {
 	char				*str;
-	char				*tmp;
 	char				*ints;
-	char				*decimals;
+	char				*final;
 	int					orig_prec;
 
 	orig_prec = prec;
@@ -95,16 +117,18 @@ static char		*split_n_join(long double nb, int prec, int int_count, int olt1)
 		nb *= 10.0;
 		prec--;
 	}
-	str = ft_itoa_base((unsigned long long)nb, 10, 0);
-	tmp = f_roundup(str, ft_strlen(str) - 2);
+	str = f_roundup(ft_itoa_base((unsigned long long)nb, 10, 0));
 	if (olt1)
-		tmp[0] = tmp[0] - 1;
-	ints = ft_strndup(tmp, int_count);
-	decimals = format_decimals(ft_strdup(tmp + int_count));
-	str = ft_strjoin(ints, decimals);
+		str[0] = str[0] - 1;
+	ints = ft_strndup(str, int_count);
 	if (orig_prec == 0)
+	{
+		free(str);
 		return (ints);
-	return (str);
+	}
+	final = ft_strjoin_free(ints, format_decimals(ft_strdup(str + int_count)));
+	free(str);
+	return (final);
 }
 
 /*
@@ -143,5 +167,5 @@ char			*ft_ftoa(long double nb, int precision)
 	}
 	else
 		str = split_n_join(nb, precision, int_count, 0);
-	return (sign == '-' ? ft_strjoin("-", str) : str);
+	return (sign == '-' ? ft_strjoin_free(ft_strdup("-"), str) : str);
 }

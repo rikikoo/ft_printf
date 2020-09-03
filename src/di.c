@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   di.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rkyttala <rkyttala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 19:10:23 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/29 19:12:45 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/03 14:20:02 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,17 @@ int		to_integer(t_specs *specs, va_list argp)
 		return (specs->width);
 	}
 	sign = (nb < 0 ? '-' : '+');
-	if (sign == '-')
-		nb *= -1;
 	if (specs->space && sign == '+')
 		sign = ' ';
-	str = ft_itoa_base(nb, 10, 0);
+	str = ft_itoa_base(sign == '-' ? (nb * -1) : nb, 10, 0);
 	len = ft_strlen(str);
 	if (specs->width > len && specs->width > specs->precision && specs->minus)
-		return (di_output_l(specs, str, len, sign));
-	if (specs->width > len && specs->width > specs->precision && !specs->minus)
-		return (di_output_r(specs, str, len, sign));
-	return (di_output(specs, str, len, sign));
+		len = di_output_l(specs, str, len, sign);
+	else if (specs->width > len && specs->width > specs->precision && \
+	!specs->minus)
+		len = di_output_r(specs, str, len, sign);
+	else
+		len = di_output(specs, str, len, sign);
+	free(str);
+	return (len);
 }

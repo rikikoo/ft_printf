@@ -6,7 +6,7 @@
 /*   By: rikikytt <rikikytt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 15:35:01 by rikikytt          #+#    #+#             */
-/*   Updated: 2020/08/13 15:39:30 by rikikyttala      ###   ########.fr       */
+/*   Updated: 2020/09/03 13:31:40 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strndup(const char *s1, int len)
 	int		i;
 
 	i = 0;
-	s2 = (char*)malloc(sizeof(char) * (len + 1));
+	s2 = (char*)malloc(sizeof(char) * len + 1);
 	if (s2 == NULL)
 		return (0);
 	while (s1[i] != '\0' && i < len)

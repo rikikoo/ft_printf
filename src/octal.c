@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   octal.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rkyttala <rkyttala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 17:09:42 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/09/02 03:49:00 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/03 12:34:27 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,26 @@ int		to_octal(t_specs *specs, va_list argp)
 {
 	unsigned long long	nb;
 	int					len;
-	char				*tmp;
+	int					joined;
 	char				*str;
 
 	if (!(nb = oux_length(specs, argp)) && specs->precision == 0)
 		return (oux_zeroprecision(specs));
 	if (nb == 0)
 		specs->pound = 0;
-	tmp = ft_itoa_base(nb, 8, 0);
-	len = ft_strlen(tmp);
+	str = ft_itoa_base(nb, 8, 0);
+	len = ft_strlen(str);
+	joined = 0;
 	if (specs->pound && specs->precision < len)
 	{
-		str = ft_strjoin_free("0", tmp);
+		str = ft_strjoin_free(ft_strdup("0"), str);
 		len++;
-		if (specs->minus)
-			return (o_output_l(specs, str, len));
-		return (o_output_r(specs, str, len));
+		joined = 1;
 	}
 	if (specs->minus)
-		return (o_output_l(specs, tmp, len));
+		len = o_output_l(specs, str, len);
 	else
-		return (o_output_r(specs, tmp, len));
+		len = o_output_r(specs, str, len);
+	free(str);
+	return (len);
 }

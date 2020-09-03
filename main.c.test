@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rkyttala <rkyttala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 17:04:02 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/09/01 20:07:35 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/03 13:24:01 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int		main(void)
 **	p
 */
 	char	*ptr;
-	ret = ft_printf("%p\t%5p\t%-15p\t%15p", &ptr, &ptr, &ptr, &ptr);
+	ret = ft_printf("%p\t%5p\t%20p\t%-20p", &ptr, &ptr, &ptr, &ptr);
 	printf("\n%d\n\n", ret);
-	ret = printf("%p\t%5p\t%-15p\t%15p", &ptr, &ptr, &ptr, &ptr);
+	ret = printf("%p\t%5p\t%20p\t%-20p", &ptr, &ptr, &ptr, &ptr);
 	printf("\n%d\n\n", ret);
 	printf("----------------------\n");
 	printf("----------------------\n");
@@ -90,6 +90,10 @@ int		main(void)
 /*
 **	u
 */
+	o = 77;
+	o_h = 77;
+	o_l = 77;
+	o_ll = 77;
 	ret = ft_printf("%u\t%5u\t%.5u\t%-5.3u", o, o, o, o);
 	printf("\n%d\n\n", ret);
 	ret = printf("%u\t%5u\t%.5u\t%-5.3u", o, o, o, o);

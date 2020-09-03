@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unsigned.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rkyttala <rkyttala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:41:46 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/08/30 22:46:34 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/03 12:44:46 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		u_output(t_specs *specs, char *str, int len)
 		ft_putstr(str);
 		if (specs->width > len)
 			ft_putpad(specs->width - len, ' ');
+		free(str);
 		if (specs->width > len)
 			return (specs->width);
 		return (len);
@@ -27,9 +28,11 @@ int		u_output(t_specs *specs, char *str, int len)
 	{
 		ft_putpad(specs->width - len, specs->zero ? '0' : ' ');
 		ft_putstr(str);
+		free(str);
 		return (specs->width);
 	}
 	ft_putstr(str);
+	free(str);
 	return (len);
 }
 
@@ -48,13 +51,14 @@ int		to_unsigned(t_specs *specs, va_list argp)
 	if (specs->precision > len)
 	{
 		if (!(pad = ft_strnew(specs->precision - len)))
-			exit(1);
+			return (-1);
 		len = specs->precision - len;
 		while (len--)
 			pad[len] = '0';
-		str = ft_strjoin(pad, tmp);
-		ft_liberator(1, &pad);
-		return (u_output(specs, str, ft_strlen(str)));
+		str = ft_strjoin_free(pad, tmp);
+		len = u_output(specs, str, ft_strlen(str));
 	}
-	return (u_output(specs, tmp, ft_strlen(tmp)));
+	else
+		len = u_output(specs, tmp, ft_strlen(tmp));
+	return (len);
 }

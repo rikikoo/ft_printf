@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   csp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rkyttala <rkyttala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 17:08:41 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/09/01 20:56:37 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/03 15:29:52 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,25 @@ int		print_pointer(t_specs *specs, va_list argp)
 	unsigned long long	ptr;
 	int					len;
 	char				*str;
+	char				*tmp;
 
 	if (!(ptr = (unsigned long long)(va_arg(argp, void *))))
 		ptr = 0;
+	tmp = ft_itoa_base(ptr, 16, 0);
 	if (ptr == 0 && specs->precision == 0)
-		str = ft_strdup_free("0x");
+		str = ft_strdup("0x");
 	else
-		str = ft_strjoin_free("0x", ft_itoa_base(ptr, 16, 0));
+		str = ft_strjoin("0x", tmp);
+	free(tmp);
 	len = ft_strlen(str);
 	if (len >= specs->width)
 	{
 		ft_putstr(str);
+		free(str);
 		return (len);
 	}
-	if (specs->minus)
-		ft_putstr(str);
-	ft_putpad(specs->width - len, ' ');
-	if (!specs->minus)
-		ft_putstr(str);
+	specs->minus ? ft_putstr(str) : ft_putpad(specs->width - len, ' ');
+	!specs->minus ? ft_putstr(str) : ft_putpad(specs->width - len, ' ');
+	free(str);
 	return (specs->width);
 }

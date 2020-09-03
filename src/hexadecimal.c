@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hexadecimal.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rkyttala <rkyttala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 22:29:59 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/09/02 03:43:27 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/03 12:37:19 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,24 +101,24 @@ int		to_hex(t_specs *specs, va_list argp, int upper)
 	int					len;
 	char				*str;
 	char				*prefix;
-	char				*tmp;
+	int					ret;
 
 	if (!(nb = oux_length(specs, argp)))
 		return (oux_zeroprecision(specs));
-	if (!(tmp = (char *)malloc(sizeof(char) * 3)))
-		exit(1);
 	if (upper)
-		tmp = ft_strcpy(tmp, "0X");
+		prefix = ft_strdup("0X");
 	else
-		tmp = ft_strcpy(tmp, "0x");
-	prefix = tmp;
-	free(tmp);
-	tmp = NULL;
+		prefix = ft_strdup("0x");
 	str = ft_itoa_base(nb, 16, upper);
 	len = ft_strlen(str);
 	if (specs->width > len && specs->width > specs->precision && !specs->minus)
-		return (x_output_r(specs, str, len, prefix));
-	if (specs->width > len && specs->width > specs->precision && specs->minus)
-		return (x_output_l(specs, str, len, prefix));
-	return (x_output(specs, str, len, prefix));
+		ret = x_output_r(specs, str, len, prefix);
+	else if (specs->width > len && specs->width > specs->precision \
+		&& specs->minus)
+		ret = x_output_l(specs, str, len, prefix);
+	else
+		ret = x_output(specs, str, len, prefix);
+	free(prefix);
+	free(str);
+	return (ret);
 }
