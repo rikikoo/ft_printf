@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   octal.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkyttala <rkyttala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 17:09:42 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/09/03 12:34:27 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/04 21:42:12 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int		to_octal(t_specs *specs, va_list argp)
 {
 	unsigned long long	nb;
 	int					len;
-	int					joined;
 	char				*str;
 
 	if (!(nb = oux_length(specs, argp)) && specs->precision == 0)
@@ -66,12 +65,10 @@ int		to_octal(t_specs *specs, va_list argp)
 		specs->pound = 0;
 	str = ft_itoa_base(nb, 8, 0);
 	len = ft_strlen(str);
-	joined = 0;
 	if (specs->pound && specs->precision < len)
 	{
 		str = ft_strjoin_free(ft_strdup("0"), str);
 		len++;
-		joined = 1;
 	}
 	if (specs->minus)
 		len = o_output_l(specs, str, len);

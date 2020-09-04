@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   float.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkyttala <rkyttala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkyttala <rkyttala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 17:01:38 by rkyttala          #+#    #+#             */
-/*   Updated: 2020/09/03 16:46:05 by rkyttala         ###   ########.fr       */
+/*   Updated: 2020/09/04 21:51:27 by rkyttala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ int		f_output_r(t_specs *specs, char *str, char sign, int len)
 	if (specs->width > len)
 	{
 		if (is_signed(specs, sign) && specs->zero)
-		{
 			ft_putchar(sign);
-			len++;
-		}
 		ft_putpad(specs->width - len, specs->zero ? '0' : ' ');
 		if (is_signed(specs, sign) && !specs->zero)
 			ft_putchar(sign);
